@@ -1,6 +1,7 @@
 FROM ubuntu:xenial
 MAINTAINER Rudy Chung <rudy.chung@liteon.com>
 
+RUN sed -i 's/archive.ubuntu.com/free.nchc.org.tw/g' /etc/apt/sources.list
 RUN apt-get update
 
 ENV TZ=Asia/Taipei
