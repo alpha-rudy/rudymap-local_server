@@ -26,16 +26,11 @@ RUN apt-get upgrade -y && \
         wget \
     && rm -rf /var/lib/apt/lists/*
 RUN locale-gen en_US.UTF-8
-
 RUN adduser --disabled-password --gecos '' builder && adduser builder sudo
-
-COPY rootfs/etc/sudoers /etc
-RUN mkdir -p /mnt/data
+ADD ./rootfs /
+RUN chown -R builder:builder /home/builder
 
 USER builder
 WORKDIR /home/builder
 
-RUN echo ". ~/.bash_profile" >> /home/builder/.bashrc
-
-COPY rootfs/home/builder/.bash_profile /home/builder/
 CMD ["/bin/bash"]
