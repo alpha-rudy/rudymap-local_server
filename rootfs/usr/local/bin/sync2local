@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+
+set -x
+
+die() {
+    echo $*
+    exit 1
+}
+
+usage() {
+    echo "export MIRROR=[kcwu|rex]"
+    echo "export LOCAL=192.168.0.3"
+    echo "export PORT=8080"
+    die "sync2local"
+}
+
+end=$1
+[ -z "$end" ] || usage
+
+[ "$MIRROR" == "kcwu" ] || [ "$MIRROR" == "rex" ] || usage
+[ "$MIRROR" == "kcwu" ] && host="moi.kcwu.csie.org"
+[ "$MIRROR" == "rex" ] && host="rudy.basecamp.tw"
+
+[ "$LOCAL" ] || usage
+[ "$PORT" ] || usage
+
+
+files="
+gmapsupp_Taiwan_moi_zh_bw.img.zip
+gmapsupp_Taiwan_moi_zh_bw3D.img.zip
+gmapsupp_Taiwan_moi_zh_camp.img.zip
+gmapsupp_Taiwan_moi_zh_camp3D.img.zip
+gmapsupp_Taiwan_moi_zh_odc.img.zip
+gmapsupp_Taiwan_moi_zh_odc3D.img.zip
+images/Android.png
+images/Cartograph.png
+images/Cartograph_dem.png
+images/Cartograph_map.png
+images/Cartograph_style.png
+images/GTS.png
+images/Garmin.png
+images/Garmin_large.jpeg
+images/Garmin_small.jpeg
+images/Locus.jpeg
+images/Locus_dem.jpeg
+images/Locus_map.jpeg
+images/Locus_style.jpeg
+images/OruxMaps.jpeg
+images/OruxMaps_dem.jpeg
+images/OruxMaps_map.jpeg
+images/OruxMaps_poi.jpeg
+images/OruxMaps_style.jpeg
+images/Windows.png
+images/iTunes.jpeg
+images/macOS.png
+images/workaround.png
+Install_MOI_Taiwan_TOPO_bw.exe
+Install_MOI_Taiwan_TOPO_bw3D.exe
+Install_MOI_Taiwan_TOPO_camp.exe
+Install_MOI_Taiwan_TOPO_camp3D.exe
+Install_MOI_Taiwan_TOPO_odc.exe
+Install_MOI_Taiwan_TOPO_odc3D.exe
+local.html
+locus_all-local.xml
+locus_dem-local.xml
+locus_map-local.xml
+locus_style-local.xml
+locus_upgrade-local.xml
+moi-hgt-lite-v2.zip
+moi-hgt-v3.zip
+moi-hgt-v4.zip
+MOI_OSM_Taiwan_TOPO_Lite.map.zip
+MOI_OSM_Taiwan_TOPO_Lite.zip
+MOI_OSM_Taiwan_TOPO_Lite_style.zip
+MOI_OSM_Taiwan_TOPO_Rudy.map.zip
+MOI_OSM_Taiwan_TOPO_Rudy.poi.zip
+MOI_OSM_Taiwan_TOPO_Rudy.zip
+MOI_OSM_Taiwan_TOPO_Rudy_hs_style.zip
+MOI_OSM_Taiwan_TOPO_Rudy_locus_style.zip
+MOI_OSM_Taiwan_TOPO_Rudy_style.zip
+Taiwan_moi_zh_bw.gmap.zip
+Taiwan_moi_zh_bw3D.gmap.zip
+Taiwan_moi_zh_camp.gmap.zip
+Taiwan_moi_zh_camp3D.gmap.zip
+Taiwan_moi_zh_odc.gmap.zip
+Taiwan_moi_zh_odc3D.gmap.zip
+"
+
+xmls="
+locus_all-local.xml
+locus_dem-local.xml
+locus_map-local.xml
+locus_style-local.xml
+locus_upgrade-local.xml
+"
+
+mkdir -p images
+
+for file in $files; do
+    echo -e "\n$file"
+    curl -R -o $file -z $file http://$host/$file || rm $file
+done
+
+for xml in $xmls; do
+    cat $xml | sed -e "s/__local_ip__/$LOCAL/g" -e "s/__local_port__/$PORT/g" > u_$xml
+done
+
+cat local.html | sed -e "s/__local_ip__/$LOCAL/g" -e "s/__local_port__/$PORT/g" > index.html
