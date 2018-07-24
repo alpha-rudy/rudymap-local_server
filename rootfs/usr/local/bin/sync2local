@@ -9,8 +9,6 @@ die() {
 
 usage() {
     echo "export MIRROR=[kcwu|rex]"
-    echo "export LOCAL=192.168.0.3"
-    echo "export PORT=8080"
     die "sync2local"
 }
 
@@ -20,9 +18,6 @@ end=$1
 [ "$MIRROR" == "kcwu" ] || [ "$MIRROR" == "rex" ] || usage
 [ "$MIRROR" == "kcwu" ] && host="moi.kcwu.csie.org"
 [ "$MIRROR" == "rex" ] && host="rudy.basecamp.tw"
-
-[ "$LOCAL" ] || usage
-[ "$PORT" ] || usage
 
 
 files="
