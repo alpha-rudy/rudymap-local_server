@@ -7,7 +7,7 @@ Upstream Links:
 
 ## Quick Start
 
-* Pick a name for the MAPS_DATA data volume. It's recommented to use the `rudymap-data`.
+* Pick a name for the MAPS_DATA data volume. It's recommended to use the `rudymap-data`.
 
       MAPS_DATA="rudymap-data"
       MIRROR="rex"  ### or "kcwu"
@@ -35,7 +35,7 @@ Upstream Links:
         web
       ### use Ctrl-C to stop local server
 
-* Or do it both (sync and start local server).
+* Or do it both (sync and start the local server).
 
       docker run -v $MAPS_DATA:/mnt/data \
         -p 8080:80 \
