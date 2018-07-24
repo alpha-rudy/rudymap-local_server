@@ -86,23 +86,8 @@ Taiwan_moi_zh_odc.gmap.zip
 Taiwan_moi_zh_odc3D.gmap.zip
 "
 
-xmls="
-locus_all-local.xml
-locus_dem-local.xml
-locus_map-local.xml
-locus_style-local.xml
-locus_upgrade-local.xml
-"
-
 mkdir -p images
-
 for file in $files; do
     echo -e "\n$file"
     curl -R -o $file -z $file http://$host/$file || rm $file
 done
-
-for xml in $xmls; do
-    cat $xml | sed -e "s/__local_ip__/$LOCAL/g" -e "s/__local_port__/$PORT/g" > u_$xml
-done
-
-cat local.html | sed -e "s/__local_ip__/$LOCAL/g" -e "s/__local_port__/$PORT/g" > index.html
