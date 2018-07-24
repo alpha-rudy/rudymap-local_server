@@ -45,6 +45,6 @@ Upstream Links:
         -it --name rudymap rudychung/rudymap-local_server
       ### user Ctrl-C to exit or to stop local server
     
-* And then simply start it next time
+* And then next time, simply start it
 
       docker start -i rudymap
