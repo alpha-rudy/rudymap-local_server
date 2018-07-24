@@ -22,15 +22,15 @@ Upstream Links:
 
       docker run -v $MAPS_DATA:/mnt/data \
         -e "MIRROR=$MIRROR" \
-        -e "LOCAL=$LOCAL" \
-        -e "PORT=$PORT" \
-        --rm rudychung/rudymap-local_server \
+        -it --rm rudychung/rudymap-local_server \
         sync2local  
     
 * Start local server process.
 
       docker run -v $MAPS_DATA:/mnt/data \
-        -p 8080:80 \
+        -p $PORT:80 \
+        -e "LOCAL=$LOCAL" \
+        -e "PORT=$PORT" \
         -it --rm rudychung/rudymap-local_server \
         web
       ### use Ctrl-C to stop local server
