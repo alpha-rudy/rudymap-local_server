@@ -32,7 +32,7 @@ Upstream Links:
         -e "LOCAL=$LOCAL" \
         -e "PORT=$PORT" \
         -it --rm rudychung/rudymap-local_server \
-        web
+        startweb
       ### use Ctrl-C to stop local server
 
 * Or do it both (sync and start the local server).
