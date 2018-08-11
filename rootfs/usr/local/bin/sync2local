@@ -61,13 +61,9 @@ locus_dem-local.xml
 locus_map-local.xml
 locus_style-local.xml
 locus_upgrade-local.xml
-moi-hgt-lite-v2.zip
-moi-hgt-v3.zip
-moi-hgt-v4.zip
-moi-hgt-v2018.zip
-hgtmix-v2018.2.zip
-hgt30-v2018.2.zip
-hgt90-v2018.2.zip
+hgtmix-v2018.3.zip
+hgt30-v2018.3.zip
+hgt90-v2018.3.zip
 MOI_OSM_Taiwan_TOPO_Lite.map.zip
 MOI_OSM_Taiwan_TOPO_Lite.zip
 MOI_OSM_Taiwan_TOPO_Lite_style.zip
